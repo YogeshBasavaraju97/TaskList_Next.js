@@ -1,10 +1,5 @@
 const AddTopics = () => {
-  return (
-    <div>
-      <form></form>
-      <input type="text" />
-    </div>
-  );
+  return <div>Add Topics</div>;
 };
 
 export default AddTopics;
