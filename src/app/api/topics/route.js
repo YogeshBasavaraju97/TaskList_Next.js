@@ -3,10 +3,20 @@ import ConnectMongoDB from '../../../../lib/mongoose';
 import Topic from '../../../../model/Topic';
 
 export async function POST(request) {
-  const { title, description } = await request.json();
-  await ConnectMongoDB();
-  await Topic.create({ title, description });
-  return NextResponse.json({ message: 'Topic Created' }, { status: 201 });
+  try {
+    const { title, description } = await request.json();
+    await ConnectMongoDB();
+    await Topic.create({ title, description });
+
+    return NextResponse.json({ message: 'ok' }, { status: 201 });
+  } catch (error) {
+    console.error('Error creating topic:', error);
+
+    return NextResponse.json(
+      { message: 'Error creating topic', error: error.message },
+      { status: 500 }
+    );
+  }
 }
 
 export async function GET() {
